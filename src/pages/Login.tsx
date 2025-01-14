@@ -20,7 +20,7 @@ export function Login() {
 
     useEffect(() => {
         if (isAuthenticated) {
-            navigate('/');
+            navigate('/dashboard');
         }
     }, [isAuthenticated, navigate]);
     const handleEmailLogin = async (e: React.FormEvent) => {
@@ -28,7 +28,7 @@ export function Login() {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             dispatch(setUser(userCredential.user));
-            navigate('/');
+            navigate('/dashboard');
         } catch (error) {
             console.error('Error signing in with email and password', error);
         }

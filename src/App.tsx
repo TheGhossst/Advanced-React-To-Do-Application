@@ -6,6 +6,8 @@ import { store } from './lib/store/store'
 import { NavBar } from './components/NavBar'
 import { LandingPage } from './pages/LandingPage'
 import { Login } from './pages/Login'
+import { Dashboard } from './pages/Dashboard'
+import { ProtectedRoute } from './components/protected-route'
 import { auth } from './lib/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import { setUser, clearUser } from './lib/store/authSlice'
@@ -33,6 +35,14 @@ function AppContent() {
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </AnimatePresence>
     </div>
