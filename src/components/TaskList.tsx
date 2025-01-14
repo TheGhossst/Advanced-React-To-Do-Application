@@ -6,7 +6,6 @@ import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { Star, Plus, X, Flag, Repeat, Calendar, Bell, Clock } from 'lucide-react'
 import { Task } from '../lib/store/taskSlice'
-import { TaskProgress } from './TaskProgress'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 import { TaskDetailsSidebar } from './TaskDetailsSidebar'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
@@ -217,10 +216,6 @@ export function TaskList() {
                             {activeTasks.length} tasks pending
                         </p>
                     </div>
-                    <TaskProgress
-                        total={filteredTasks.length}
-                        completed={completedTasks.length}
-                    />
                 </div>
 
                 {isAddingTask ? (
