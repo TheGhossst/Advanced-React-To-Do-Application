@@ -1,10 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit'
 import themeReducer from './themeSlice'
+import authReducer from './authSlice'
 
 export const store = configureStore({
-  reducer: {
-    theme: themeReducer,
-  },
+    reducer: {
+        theme: themeReducer,
+        auth: authReducer,
+    },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: ['auth/setUser'],
+            },
+        }),
 })
 
 export type RootState = ReturnType<typeof store.getState>

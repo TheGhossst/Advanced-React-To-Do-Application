@@ -134,6 +134,14 @@ export function LandingPage() {
                     </motion.div>
                 </div>
             </section>
+            <footer className="py-6 border-t">
+                <div className="container px-4 mx-auto md:px-6">
+                    <p className="text-sm text-center text-gray-500 dark:text-gray-400">
+                        © 2024 DoIt. All rights reserved.
+                    </p>
+                </div>
+            </footer>
         </main>
+
     )
 }

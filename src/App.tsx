@@ -1,12 +1,30 @@
+import { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom'
-import { Provider } from 'react-redux'
+import { Provider, useDispatch } from 'react-redux'
 import { AnimatePresence } from 'framer-motion'
 import { store } from './lib/store/store'
 import { NavBar } from './components/NavBar'
 import { LandingPage } from './pages/LandingPage'
+import { Login } from './pages/Login'
+import { auth } from './lib/firebase'
+import { onAuthStateChanged } from 'firebase/auth'
+import { setUser, clearUser } from './lib/store/authSlice'
 
 function AppContent() {
   const location = useLocation()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(setUser(user))
+      } else {
+        dispatch(clearUser())
+      }
+    })
+
+    return () => unsubscribe()
+  }, [dispatch])
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -14,21 +32,14 @@ function AppContent() {
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </AnimatePresence>
-      <footer className="py-6 border-t">
-        <div className="container px-4 mx-auto md:px-6">
-          <p className="text-sm text-center text-gray-500 dark:text-gray-400">
-            © 2024 DoIt. All rights reserved.
-          </p>
-        </div>
-      </footer>
-
     </div>
   )
 }
 
-function App() {
+export default function App() {
   return (
     <Provider store={store}>
       <Router>
@@ -37,6 +48,3 @@ function App() {
     </Provider>
   )
 }
-
-export default App
-
