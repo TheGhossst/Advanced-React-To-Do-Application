@@ -16,7 +16,7 @@ export function Sidebar() {
     const completionPercentage = totalTasks ? (completedTasks / totalTasks) * 100 : 0
 
     return (
-        <div className="w-64 min-h-screen text-white bg-transparent border-r-4">
+        <div className="w-64 min-h-screen border-r-4 bg-transparent text-foreground">
             <div className="p-4">
                 <div className="flex items-center gap-3 mb-8">
                     <div className="w-10 h-10 overflow-hidden rounded-full">
@@ -32,7 +32,7 @@ export function Sidebar() {
                             </div>
                         )}
                     </div>
-                    <h2 className="text-sm font-medium">
+                    <h2 className="text-sm font-medium text-foreground">
                         Hey, {user?.displayName || 'User'}
                     </h2>
                 </div>
@@ -86,43 +86,56 @@ export function Sidebar() {
                     <Plus className="w-4 h-4 mr-3" />
                     Add list
                 </Button>
-                <div className="p-4 bg-[#252525] rounded-lg">
-                    <div className="mb-4">
-                        <h3 className="mb-1 text-sm font-medium">Today Tasks</h3>
-                        <p className="text-2xl font-bold">{pendingTasks}</p>
+                <div className="p-6 bg-card rounded-lg">
+                    <div className="mb-6">
+                        <h3 className="mb-2 text-sm font-medium text-muted-foreground">Today's Progress</h3>
+                        <div className="flex items-baseline gap-2">
+                            <p className="text-3xl font-bold text-foreground">{pendingTasks}</p>
+                            <p className="text-sm text-muted-foreground">tasks remaining</p>
+                        </div>
                     </div>
 
-                    <div className="relative w-full h-32">
-                        <svg className="w-full h-full" viewBox="0 0 100 100">
+                    <div className="relative w-full h-40">
+                        <svg className="w-full h-full -rotate-90 transform">
                             <circle
-                                className="stroke-[#3A3A3A] fill-none"
-                                strokeWidth="8"
-                                r="40"
-                                cx="50"
-                                cy="50"
+                                className="text-[#3A3A3A]"
+                                strokeWidth="12"
+                                stroke="currentColor"
+                                fill="transparent"
+                                r="70"
+                                cx="80"
+                                cy="80"
                             />
                             <circle
-                                className="stroke-green-600 fill-none"
-                                strokeWidth="8"
+                                className="text-green-500 transition-all duration-1000 ease-in-out"
+                                strokeWidth="12"
+                                strokeDasharray={`${completionPercentage * 4.4}, 440`}
                                 strokeLinecap="round"
-                                strokeDasharray={`${completionPercentage * 2.51327}, 251.327`}
-                                transform="rotate(-90 50 50)"
-                                r="40"
-                                cx="50"
-                                cy="50"
+                                stroke="currentColor"
+                                fill="transparent"
+                                r="70"
+                                cx="80"
+                                cy="80"
                             />
                         </svg>
+
+                        <div className="absolute inset-0 flex flex-col items-center justify-center">
+                            <span className="text-2xl font-bold">
+                                {Math.round(completionPercentage)}%
+                            </span>
+                            <span className="text-sm text-gray-400">Completed</span>
+                        </div>
                     </div>
 
-                    <div className="flex justify-between mt-2 text-xs">
-                        <span className="flex items-center">
-                            <span className="w-2 h-2 mr-2 bg-green-600 rounded-full"></span>
-                            Pending
-                        </span>
-                        <span className="flex items-center">
-                            <span className="w-2 h-2 mr-2 bg-green-300 rounded-full"></span>
-                            Done
-                        </span>
+                    <div className="flex justify-between mt-6 text-sm">
+                        <div className="flex items-center gap-2">
+                            <span className="block w-3 h-3 rounded-full bg-green-500" />
+                            <span className="text-muted-foreground">Done ({completedTasks})</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <span className="block w-3 h-3 rounded-full bg-[#3A3A3A]" />
+                            <span className="text-muted-foreground">Pending ({pendingTasks})</span>
+                        </div>
                     </div>
                 </div>
             </div>

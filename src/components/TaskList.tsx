@@ -113,8 +113,10 @@ export function TaskList() {
         <div
             className="relative flex flex-col gap-2 p-4 transition-all duration-200 border-l-4 rounded-lg cursor-pointer group hover:shadow-md bg-background/40 backdrop-blur-sm hover:translate-x-1"
             style={{
-                borderLeftColor: task.priority === 'high' ? '#ef4444' :
-                    task.priority === 'medium' ? '#f59e0b' : '#22c55e'
+                borderLeftColor: task.completed ? '#22c55e' : 
+                    task.priority === 'high' ? '#ef4444' : 
+                    task.priority === 'medium' ? '#f97316' : 
+                    task.priority === 'low' ? '#ffffff``' : '#f97316'
             }}
             onClick={() => setSelectedTask(task)}
         >
@@ -397,6 +399,7 @@ export function TaskList() {
                 <TaskDetailsSidebar
                     task={selectedTask}
                     onClose={() => setSelectedTask(null)}
+                    onComplete={handleToggleComplete}
                 />
             )}
         </div>
