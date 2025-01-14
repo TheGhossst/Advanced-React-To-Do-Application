@@ -35,7 +35,6 @@ export function TaskDetailsSidebar({ task, onClose, onComplete }: TaskDetailsSid
 
     return (
         <div className="fixed inset-y-0 right-0 w-96 border-l shadow-lg bg-[#1F1F1F] text-white animate-in slide-in-from-right">
-            {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-[#2A2A2A]">
                 <h2 className="text-lg font-semibold">Task Details</h2>
                 <Button variant="ghost" size="icon" onClick={onClose}>
@@ -78,7 +77,6 @@ export function TaskDetailsSidebar({ task, onClose, onComplete }: TaskDetailsSid
                             </Button>
                         </div>
 
-                        {/* Status Section */}
                         <div className="p-4 rounded-lg bg-[#2A2A2A] space-y-4">
                             <div className="flex items-center justify-between">
                                 <span className="text-sm font-medium">Status</span>
@@ -96,16 +94,14 @@ export function TaskDetailsSidebar({ task, onClose, onComplete }: TaskDetailsSid
                             </div>
 
                             <div className="flex items-center gap-2">
-                                <Flag className={`w-4 h-4 ${
-                                    task.priority === 'high' ? 'text-red-500' :
-                                    task.priority === 'medium' ? 'text-orange-500' :
-                                    'text-white'
-                                }`} />
+                                <Flag className={`w-4 h-4 ${task.priority === 'high' ? 'text-red-500' :
+                                        task.priority === 'medium' ? 'text-orange-500' :
+                                            'text-white'
+                                    }`} />
                                 <span className="text-sm">Priority: {task.priority}</span>
                             </div>
                         </div>
 
-                        {/* Date & Time Section */}
                         <div className="space-y-4">
                             {task.dueDate && (
                                 <div className="flex items-center gap-2">
