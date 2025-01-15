@@ -1,11 +1,13 @@
-import { X, Calendar, Bell, Repeat, Flag } from 'lucide-react'
+import { X, Calendar, Bell, Repeat, Flag, AlertCircle, CloudSun } from 'lucide-react'
 import { Task } from '../lib/store/taskSlice'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { updateTask } from '../lib/store/taskSlice'
 import { AppDispatch } from '../lib/store/store'
+import { getWeather, WeatherData, WeatherError } from '../lib/services/weatherService'
+import { Alert, AlertDescription } from './ui/alert'
 
 interface TaskDetailsSidebarProps {
     task: Task
@@ -18,6 +20,27 @@ export function TaskDetailsSidebar({ task, onClose, onComplete }: TaskDetailsSid
     const [title, setTitle] = useState(task.title)
     const [description, setDescription] = useState(task.description || '')
     const [isEditing, setIsEditing] = useState(false)
+    const [weather, setWeather] = useState<WeatherData | null>(null)
+    const [weatherError, setWeatherError] = useState<string | null>(null)
+
+    useEffect(() => {
+        if (task.isOutdoor && task.location) {
+            const fetchWeather = async () => {
+                try {
+                    // Add type assertion since we know location exists in this block
+                    const data = await getWeather(task.location as string)
+                    setWeather(data)
+                    setWeatherError(null)
+                } catch (error) {
+                    setWeatherError(error instanceof WeatherError ?
+                        error.message : 
+                        'Failed to load weather information'
+                    )
+                }
+            }
+            fetchWeather()
+        }
+    }, [task.isOutdoor, task.location])
 
     const handleSave = async () => {
         try {
@@ -101,6 +124,51 @@ export function TaskDetailsSidebar({ task, onClose, onComplete }: TaskDetailsSid
                                 <span className="text-sm">Priority: {task.priority}</span>
                             </div>
                         </div>
+
+                        {task.isOutdoor && (
+                            <div className="p-4 rounded-lg bg-card space-y-4">
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-2">
+                                        <CloudSun className="w-4 h-4" />
+                                        <span className="text-sm font-medium">Weather in {task.location}</span>
+                                    </div>
+                                </div>
+
+                                {weatherError ? (
+                                    <Alert variant="destructive">
+                                        <AlertCircle className="w-4 h-4" />
+                                        <AlertDescription>{weatherError}</AlertDescription>
+                                    </Alert>
+                                ) : weather ? (
+                                    <div className="space-y-2">
+                                        <div className="flex items-center gap-2">
+                                            <img 
+                                                src={weather.icon} 
+                                                alt={weather.description}
+                                                className="w-10 h-10"
+                                            />
+                                            <div>
+                                                <p className="text-sm">{weather.description}</p>
+                                                <p className="text-lg font-bold">{weather.temperature}°C</p>
+                                            </div>
+                                        </div>
+                                        
+                                        {!weather.isOutdoorFriendly && (
+                                            <Alert>
+                                                <AlertCircle className="w-4 h-4" />
+                                                <AlertDescription>
+                                                    Weather conditions might not be suitable for outdoor activities
+                                                </AlertDescription>
+                                            </Alert>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <div className="flex items-center justify-center p-4">
+                                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+                                    </div>
+                                )}
+                            </div>
+                        )}
 
                         <div className="space-y-4">
                             {task.dueDate && (

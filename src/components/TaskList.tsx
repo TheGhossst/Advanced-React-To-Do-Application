@@ -5,7 +5,7 @@ import { fetchTasks, addTask, updateTask, deleteTask } from '../lib/store/taskSl
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { Star, Plus, X, Flag, Repeat, Calendar, Bell, Clock } from 'lucide-react'
-import { Task } from '../lib/store/taskSlice'
+import { Task } from '../types/task'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 import { TaskDetailsSidebar } from './TaskDetailsSidebar'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
@@ -112,10 +112,10 @@ export function TaskList() {
         <div
             className="relative flex flex-col gap-2 p-4 transition-all duration-200 border-l-4 rounded-lg cursor-pointer group hover:shadow-md bg-background/40 backdrop-blur-sm hover:translate-x-1"
             style={{
-                borderLeftColor: task.completed ? '#22c55e' : 
-                    task.priority === 'high' ? '#ef4444' : 
-                    task.priority === 'medium' ? '#f97316' : 
-                    task.priority === 'low' ? '#ffffff``' : '#f97316'
+                borderLeftColor: task.completed ? '#22c55e' :
+                    task.priority === 'high' ? '#ef4444' :
+                        task.priority === 'medium' ? '#f97316' :
+                            task.priority === 'low' ? '#ffffff``' : '#f97316'
             }}
             onClick={() => setSelectedTask(task)}
         >
@@ -335,6 +335,40 @@ export function TaskList() {
                                     </SelectContent>
                                 </Select>
                             </div>
+
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-muted-foreground">
+                                    Task Type
+                                </label>
+                                <div className="flex items-center gap-2">
+                                    <input
+                                        type="checkbox"
+                                        checked={newTaskData.isOutdoor || false}
+                                        onChange={(e) => setNewTaskData(prev => ({
+                                            ...prev,
+                                            isOutdoor: e.target.checked
+                                        }))}
+                                        className="w-4 h-4"
+                                    />
+                                    <span className="text-sm">Outdoor Activity</span>
+                                </div>
+                            </div>
+
+                            {newTaskData.isOutdoor && (
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-muted-foreground">
+                                        Location
+                                    </label>
+                                    <Input
+                                        placeholder="Enter city name"
+                                        value={newTaskData.location || ''}
+                                        onChange={(e) => setNewTaskData(prev => ({
+                                            ...prev,
+                                            location: e.target.value
+                                        }))}
+                                    />
+                                </div>
+                            )}
                         </div>
 
                         <div className="flex items-center justify-end gap-2 p-4 border-t bg-muted/50">

@@ -45,7 +45,7 @@ export function NavBar() {
                         <Menu className="w-6 h-6" />
                         <span className="sr-only">Toggle menu</span>
                     </Button>
-                    <Link to = "/">
+                    <Link to="/">
                         <img
                             src="logo.png"
                             alt="DoIt Logo"
