@@ -12,7 +12,7 @@ A task management application built with React, Redux, and Firebase. This applic
 
 ## Technologies Used
 
-- **Frontend**: React, Redux, TypeScript, Material UI
+- **Frontend**: React, Redux, TypeScript
 - **Backend**: Firebase (Firestore for database, Authentication)
 - **Weather API**: OpenWeatherMap API for fetching weather data
 - **Styling**: Tailwind CSS for styling components
