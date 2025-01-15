@@ -44,7 +44,7 @@ export function Login() {
                 emailVerified: result.user.emailVerified ?? false,
             }));
 
-            navigate('/');
+            navigate('/dashboard');
         } catch (error) {
             console.error('Error signing in with Google', error);
         }
