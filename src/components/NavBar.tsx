@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toggleTheme } from '../lib/store/themeSlice'
 import { clearUser } from '../lib/store/authSlice'
 import { RootState } from '../lib/store/store'
-import { Menu, Moon, Sun } from 'lucide-react'
+import { Moon, Sun } from 'lucide-react'
 import { Button } from "./ui/button"
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { auth } from '../lib/firebase'
@@ -41,10 +41,7 @@ export function NavBar() {
         <nav className="relative border-b">
             <div className="flex items-center justify-between h-16 px-4">
                 <div className="flex items-center gap-2">
-                    <Button variant="ghost" size="icon">
-                        <Menu className="w-6 h-6" />
-                        <span className="sr-only">Toggle menu</span>
-                    </Button>
+                    
                     <Link to="/">
                         <img
                             src="logo.png"
