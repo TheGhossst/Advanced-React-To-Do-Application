@@ -1,5 +1,5 @@
 import { X, Calendar, Bell, Repeat, Flag, AlertCircle, CloudSun } from 'lucide-react'
-import { Task } from '../lib/store/taskSlice'
+import { Task } from '../types/task'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { useState, useEffect } from 'react'
