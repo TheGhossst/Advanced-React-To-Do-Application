@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../lib/store/store'
 import { setActiveList } from '../lib/store/taskSlice'
 import { Button } from './ui/button'
-import { ListChecks, CalendarDays, Star, Calendar, Users, Plus } from 'lucide-react'
+import { ListChecks, CalendarDays, Star, Calendar, Plus } from 'lucide-react'
 
 export function Sidebar() {
     const dispatch = useDispatch()
@@ -69,14 +69,14 @@ export function Sidebar() {
                         <Calendar className="w-4 h-4 mr-3" />
                         Planned
                     </Button>
-                    <Button
+                    {/*<Button
                         variant="ghost"
                         className={`w-full justify-start ${activeList === 'assigned' ? 'bg-white/10' : 'hover:bg-white/5'}`}
                         onClick={() => dispatch(setActiveList('assigned'))}
                     >
                         <Users className="w-4 h-4 mr-3" />
                         Assigned to me
-                    </Button>
+                    </Button>*/}
                 </nav>
 
                 <Button

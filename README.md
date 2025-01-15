@@ -1,50 +1,71 @@
-# React + TypeScript + Vite
+# Task Management Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A task management application built with React, Redux, and Firebase. This application allows users to create, update, delete, and manage tasks efficiently. It also includes features like weather information for outdoor tasks, user authentication, and a responsive design.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **User Authentication**: Users can sign up, log in, and log out.
+- **Task Management**: Create, update, delete, and mark tasks as complete.
+- **Task Filtering**: Filter tasks by categories such as All, Today, Important, Planned, and Assigned.
+- **Weather Information**: Fetch and display weather data for outdoor tasks.
+- **Responsive Design**: Works seamlessly on both desktop and mobile devices.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Frontend**: React, Redux, TypeScript, Material UI
+- **Backend**: Firebase (Firestore for database, Authentication)
+- **Weather API**: OpenWeatherMap API for fetching weather data
+- **Styling**: Tailwind CSS for styling components
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/TheGhossst/Advanced-React-To-Do-Application.git
+   ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. Navigate to the project directory:
+   ```bash
+   cd Advanced-React-To-Do-Application
+   ```
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+4. Create a `.env` file in the root directory and add your Firebase and OpenWeatherMap API keys:
+   ```plaintext
+   VITE_FIREBASE_API_KEY=your_firebase_api_key
+   VITE_OPENWEATHER_API_KEY=your_openweather_api_key
+   ```
+
+5. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+6. Open your browser and navigate to `http://localhost:5173`.
+
+## Usage
+
+- **Creating a Task**: Click on the "Add Task" button, fill in the task details, and click "Create Task".
+- **Editing a Task**: Click on a task to view its details, then click the edit button to modify it.
+- **Deleting a Task**: Click on the delete button next to a task to remove it.
+- **Filtering Tasks**: Use the sidebar to filter tasks by different categories.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a pull request or open an issue for any suggestions or improvements.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [React](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
+- [Firebase](https://firebase.google.com/)
+- [OpenWeatherMap](https://openweathermap.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
